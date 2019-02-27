@@ -4,7 +4,6 @@ import {ConferenceMap} from "../maps/ConferenceMap";
 import {MapMarker} from "../maps/MapMarker";
 import {Achievement} from "../achievements/Achievement";
 import {ContentGroup} from "../groups/ContentGroup";
-import {UsageStat} from "../stats/UsageStat";
 
 
 const apiUrl = "/api";
@@ -104,18 +103,6 @@ function convertServerToClientGroup(input: ServerGroup): ContentGroup {
         id: input.id.toString(),
         name: input.name,
         enabled: input.enabled,
-    }
-}
-
-interface ServerStat {
-    time: ServerTime,
-    requestCount: number,
-}
-
-function convertServerToClientStat(input: ServerStat): UsageStat {
-    return {
-        time: convertServerTime(input.time),
-        requestCount: input.requestCount,
     }
 }
 
@@ -310,18 +297,6 @@ export const RealAPI: API = {
         const enableOrDisable = enabled ? "enable" : "disable";
 
         await doFetch(`${apiUrl}/admin/groups/${groupId}/${enableOrDisable}`);
-    },
-
-    getUsageStats: async () => {
-        const response : APIResponse<ServerStat[]> = await doFetch(`${apiUrl}/admin/usage`);
-
-        return response.payload.map(convertServerToClientStat);
-    },
-
-    getUserCount: async () => {
-        const response : APIResponse<number> = await doFetch(`${apiUrl}/admin/users`);
-
-        return response.payload;
     }
 
 };

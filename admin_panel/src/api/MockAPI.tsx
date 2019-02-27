@@ -6,7 +6,6 @@ import {MapMarker} from "../maps/MapMarker";
 import {Achievement} from "../achievements/Achievement";
 import * as uuidv4 from "uuid/v4";
 import {ContentGroup} from "../groups/ContentGroup";
-import {UsageStat} from "../stats/UsageStat";
 
 
 const mockEvents: IDMap<Event> = {
@@ -97,13 +96,7 @@ const mockGroups: IDMap<ContentGroup> = {
         name: "Dragons",
         enabled: false,
     }
-};
-
-const mockStats: UsageStat[] = [
-    {time: Date.now() - 120000, requestCount: 11},
-    {time: Date.now() - 73000, requestCount: 4},
-    {time: Date.now() - 23000, requestCount: 21},
-];
+}
 
 // the mock API that we use for manual testing
 export const MockAPI: API = {
@@ -202,14 +195,6 @@ export const MockAPI: API = {
 
     toggleGroup: async (groupId, enabled) => {
         mockGroups[groupId].enabled = enabled;
-    },
-
-    getUsageStats: async () => {
-        return mockStats;
-    },
-
-    getUserCount: async () => {
-        return 37;
     }
 
 };

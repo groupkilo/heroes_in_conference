@@ -4,7 +4,6 @@ import {GridPos, MapMarker} from "../maps/MapMarker";
 import {Achievement} from "../achievements/Achievement";
 import {RealAPI} from "./RealAPI";
 import {ContentGroup} from "../groups/ContentGroup";
-import {UsageStat} from "../stats/UsageStat";
 
 export interface API {
 
@@ -40,10 +39,6 @@ export interface API {
     getGroups: () => Promise<ContentGroup[]>,
 
     toggleGroup: (groupId: string, enabled: boolean) => Promise<void>,
-
-    getUsageStats: () => Promise<UsageStat[]>,
-
-    getUserCount: () => Promise<number>
 
 }
 

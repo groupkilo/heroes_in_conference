@@ -63,20 +63,23 @@ public class Database {
       PreparedStatement stmt =
           conc.prepareStatement(
               "SELECT *, COUNT("
-                  + "a."
+                  + Achievement.ACHIEVED_TABLE
+                  + "."
                   + Achievement.ACHIEVED_ACHIEVEMENT_ID_FIELD
                   + ") AS "
                   + Achievement.COUNT_FIELD
                   + " FROM "
                   + Achievement.TABLE
-                  + " LEFT JOIN "
+                  + ", "
                   + Achievement.ACHIEVED_TABLE
-                  + " a ON "
+                  + " WHERE "
+                  + Achievement.ACHIEVED_TABLE
+                  + "."
+                  + Achievement.ACHIEVED_ACHIEVEMENT_ID_FIELD
+                  + " = "
                   + Achievement.TABLE
                   + "."
                   + Achievement.ID_FIELD
-                  + " = a."
-                  + Achievement.ACHIEVED_ACHIEVEMENT_ID_FIELD
                   + " GROUP BY "
                   + Achievement.TABLE
                   + "."
