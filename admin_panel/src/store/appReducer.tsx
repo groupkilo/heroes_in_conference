@@ -5,6 +5,9 @@ import {reduceEvents} from "./reducers/events";
 import {reduceAllEvents} from "./reducers/allEvents";
 import {reduceMapCache} from "./reducers/mapCache";
 import {reduceMarkerCache} from "./reducers/markerCache";
+import {reduceLoggedIn} from "./reducers/loggedIn";
+import {reduceAchievementCache} from "./reducers/achievementCache";
+import {reduceGroupCache} from "./reducers/groupCache";
 
 
 export const appReducer = combineReducers<AppState, AppObjectAction>({
@@ -12,4 +15,7 @@ export const appReducer = combineReducers<AppState, AppObjectAction>({
     allEvents: reduceAllEvents,
     mapCache: reduceMapCache,
     markerCache: reduceMarkerCache,
+    loggedIn: reduceLoggedIn,
+    achievementCache: reduceAchievementCache,
+    groupCache: reduceGroupCache,
 });

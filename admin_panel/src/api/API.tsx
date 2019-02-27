@@ -1,7 +1,9 @@
 import {Event} from "../events/Event";
-import {MockAPI} from "./MockAPI";
 import {ConferenceMap} from "../maps/ConferenceMap";
-import {MapMarker} from "../maps/MapMarker";
+import {GridPos, MapMarker} from "../maps/MapMarker";
+import {Achievement} from "../achievements/Achievement";
+import {RealAPI} from "./RealAPI";
+import {ContentGroup} from "../groups/ContentGroup";
 
 export interface API {
 
@@ -12,7 +14,7 @@ export interface API {
     deleteEvent: (id: string) => Promise<void>,
 
     // update or create an event
-    updateEvent: (event: Event) => Promise<void>,
+    updateEvent: (event: Event) => Promise<Event>,
 
     getMaps: () => Promise<ConferenceMap[]>,
 
@@ -20,12 +22,24 @@ export interface API {
 
     // base64 string of image data, you can probably infer image type from this
     // new ConferenceMap returned has the new url to the image, if needed
-    updateMap: (map: ConferenceMap, image?: string) => Promise<ConferenceMap>,
+    updateMap: (map: ConferenceMap, image?: Blob) => Promise<ConferenceMap>,
 
-    getMapMarkers: () => Promise<MapMarker[]>,
+    getMapMarkers: (mapId: string) => Promise<MapMarker[]>,
+
+    createMapMarker: (mapId: string, pos: GridPos) => Promise<MapMarker>,
 
     updateMapMarkers: (modifiedMarkers: MapMarker[], deletedMarkers: string[]) => Promise<void>,
 
+    login: (password: string) => Promise<boolean>,
+
+    checkLoggedIn: () => Promise<boolean>,
+
+    getAchievements: () => Promise<Achievement[]>,
+
+    getGroups: () => Promise<ContentGroup[]>,
+
+    toggleGroup: (groupId: string, enabled: boolean) => Promise<void>,
+
 }
 
-export const API : API = MockAPI;
+export const API : API = RealAPI;

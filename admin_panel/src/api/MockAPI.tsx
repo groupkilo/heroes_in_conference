@@ -3,6 +3,9 @@ import {Event} from "../events/Event";
 import {IDMap} from "../store/IDMap";
 import {ConferenceMap} from "../maps/ConferenceMap";
 import {MapMarker} from "../maps/MapMarker";
+import {Achievement} from "../achievements/Achievement";
+import * as uuidv4 from "uuid/v4";
+import {ContentGroup} from "../groups/ContentGroup";
 
 
 const mockEvents: IDMap<Event> = {
@@ -68,6 +71,33 @@ const mockMarkers: IDMap<MapMarker> = {
     }
 };
 
+
+const mockAchievements: IDMap<Achievement> = {
+    "1": {
+        id: "1",
+        name: "first",
+        count: 7,
+    },
+    "2": {
+        id: "2",
+        name: "second",
+        count: 666,
+    }
+};
+
+const mockGroups: IDMap<ContentGroup> = {
+    "1": {
+        id: "1",
+        name: "Cows",
+        enabled: true,
+    },
+    "2": {
+        id: "2",
+        name: "Dragons",
+        enabled: false,
+    }
+}
+
 // the mock API that we use for manual testing
 export const MockAPI: API = {
 
@@ -77,6 +107,15 @@ export const MockAPI: API = {
 
     updateEvent: async (event: Event) => {
         mockEvents[event.id] = event;
+
+        if(event.id === "new") {
+            return {
+                ...event,
+                id: uuidv4(),
+            }
+        }
+
+        return event;
     },
 
     deleteEvent: async (id: string) => {
@@ -91,7 +130,7 @@ export const MockAPI: API = {
         return IDMap.values(mockMaps);
     },
 
-    updateMap: async (map: ConferenceMap, image: string) => {
+    updateMap: async (map: ConferenceMap) => {
         mockMaps[map.id] = map;
 
         // TODO mock image updating
@@ -111,6 +150,16 @@ export const MockAPI: API = {
         return IDMap.values(mockMarkers);
     },
 
+    createMapMarker: async (mapId, pos) => {
+        return {
+            id: uuidv4(),
+            mapId,
+            name: "New Marker",
+            description: "",
+            pos,
+        }
+    },
+
     updateMapMarkers: async (modifiedMarkers: MapMarker[], deletedMarkers: string[]) => {
         // update modified markers
         for (const marker of modifiedMarkers) {
@@ -123,6 +172,30 @@ export const MockAPI: API = {
         }
     },
 
+    login: async (password) => {
+        if(password === "password") {
+            document.cookie = "hello";
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    checkLoggedIn: async () => {
+        return true;
+    },
+
+    getAchievements: async () => {
+        return IDMap.values(mockAchievements);
+    },
+
+    getGroups: async () => {
+        return IDMap.values(mockGroups);
+    },
+
+    toggleGroup: async (groupId, enabled) => {
+        mockGroups[groupId].enabled = enabled;
+    }
 
 };
 
