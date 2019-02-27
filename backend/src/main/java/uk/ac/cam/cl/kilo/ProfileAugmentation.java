@@ -99,7 +99,7 @@ public class ProfileAugmentation {
   }
 
   private void addHat(Mat photo, Rect face) {
-    Mat hat = texts.get(new Random().nextInt(hats.size()));
+    Mat hat = hats.get(new Random().nextInt(hats.size()));
 
     double hatHeight = hat.height();
     double hatWidth = hat.width();
@@ -122,7 +122,7 @@ public class ProfileAugmentation {
   }
 
   private void addMask(Mat photo, Rect face) {
-    Mat mask = texts.get(new Random().nextInt(masks.size()));
+    Mat mask = masks.get(new Random().nextInt(masks.size()));
     Mat resizedMask = new Mat();
     Imgproc.resize(mask, resizedMask, face.size());
     Mat destinationROI = photo.submat(face);
