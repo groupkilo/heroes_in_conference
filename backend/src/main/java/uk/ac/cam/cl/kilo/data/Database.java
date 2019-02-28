@@ -183,6 +183,32 @@ public class Database {
   }
 
   /**
+   * @param query the name string to query for
+   * @param n the number of users to get
+   * @return the list of users with a name similar to the given name
+   * @throws DatabaseException if the database could not be accessed
+   */
+  public List<User> getUsersWithNameSimilarTo(String query, int n) throws DatabaseException {
+    // Escape for 'like' query
+    query = query.replace("!", "!!").replace("%", "!%").replace("_", "!_").replace("[", "![");
+    try (Connection conc = getConnection()) {
+      List<User> result = new ArrayList<>();
+      if (query == null | query.equals("") | n <= 0) return result;
+      PreparedStatement stmt =
+          conc.prepareStatement(
+              "SELECT * FROM " + User.TABLE + " WHERE " + User.NAME_FIELD + " LIKE ? LIMIT ?");
+      // Prefix and suffix match
+      stmt.setString(1, "%" + query + "%");
+      stmt.setInt(2, n);
+      ResultSet rs = stmt.executeQuery();
+      while (rs.next()) result.add(User.from(rs));
+      return result;
+    } catch (SQLException e) {
+      throw new DatabaseException(e);
+    }
+  }
+
+  /**
    * @return the number of users registered with the system
    * @throws DatabaseException if the database could not be accessed
    */

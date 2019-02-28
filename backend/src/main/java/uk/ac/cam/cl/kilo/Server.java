@@ -56,6 +56,7 @@ import uk.ac.cam.cl.kilo.data.MapMarker;
 import uk.ac.cam.cl.kilo.data.Session;
 import uk.ac.cam.cl.kilo.data.UsageStatistic;
 import uk.ac.cam.cl.kilo.data.User;
+import uk.ac.cam.cl.kilo.data.UserProfile;
 
 /**
  * Server.java
@@ -152,6 +153,8 @@ public class Server {
   public static void configureUploadDirectory() {
     log.info("Configuring upload directory...");
     uploadDir = new File("static/upload");
+    uploadDir.mkdirs();
+    uploadDir = new File("static/profiles");
     uploadDir.mkdirs();
     log.info("Upload directory configured!");
   }
@@ -634,7 +637,7 @@ public class Server {
                           "/",
                           (request, response) -> {
                             User user = authenticatedUserFor(request);
-                            return ok(user.getID());
+                            return ok(new UserProfile(user));
                           },
                           gson::toJson);
                       get(
@@ -686,16 +689,17 @@ public class Server {
                           "/query/:query",
                           (request, response) -> {
                             authenticatedUserFor(request);
-                            // TODO
-                            return ok(null);
+                            String query = request.params(":query");
+                            return ok(Database.getInstance().getUsersWithNameSimilarTo(query, 20));
                           },
                           gson::toJson);
                       get(
                           "/:user/profile",
                           (request, response) -> {
                             authenticatedUserFor(request);
-                            // TODO
-                            return ok(null);
+                            long id = Long.parseLong(request.params(":user"));
+                            User user = User.getByID(id);
+                            return ok(new UserProfile(user));
                           },
                           gson::toJson);
                     });
