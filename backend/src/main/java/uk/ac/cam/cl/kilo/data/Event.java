@@ -352,12 +352,17 @@ public class Event {
   static Event from(ResultSet rs) throws DatabaseException {
     assert (rs != null);
     try {
-      long id = rs.getLong("a." + ID_FIELD);
+      long id = rs.getLong(ID_FIELD);
       String name = rs.getString(NAME_FIELD);
       String desc = rs.getString(DESC_FIELD);
       Instant start = rs.getTimestamp(START_FIELD).toInstant();
       Instant end = rs.getTimestamp(END_FIELD).toInstant();
-      int count = rs.getInt(COUNT_FIELD);
+      int count;
+      try {
+        count = rs.getInt(COUNT_FIELD);
+      } catch (SQLException e) {
+        count = 0;
+      }
       return new Event(id, name, desc, start, end, count);
     } catch (SQLException e) {
       throw new DatabaseException(e);
