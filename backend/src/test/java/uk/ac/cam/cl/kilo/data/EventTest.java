@@ -53,10 +53,16 @@ public class EventTest {
     when(rs.first()).thenReturn(true);
     when(rs.getLong(any(String.class))).thenReturn(1L);
     when(rs.getInt(any(String.class))).thenReturn(100);
+    when(rs.getString(Event.TABLE + "." + Event.NAME_FIELD)).thenReturn("test");
     when(rs.getString(Event.NAME_FIELD)).thenReturn("test");
+    when(rs.getString(Event.TABLE + "." + Event.DESC_FIELD)).thenReturn("example");
     when(rs.getString(Event.DESC_FIELD)).thenReturn("example");
     when(rs.getTimestamp(Event.START_FIELD)).thenReturn(Timestamp.from(Instant.ofEpochSecond(100)));
+    when(rs.getTimestamp(Event.TABLE + "." + Event.START_FIELD))
+        .thenReturn(Timestamp.from(Instant.ofEpochSecond(100)));
     when(rs.getTimestamp(Event.END_FIELD)).thenReturn(Timestamp.from(Instant.ofEpochSecond(200)));
+    when(rs.getTimestamp(Event.TABLE + "." + Event.END_FIELD))
+        .thenReturn(Timestamp.from(Instant.ofEpochSecond(200)));
   }
 
   @Test(expected = IllegalArgumentException.class)
