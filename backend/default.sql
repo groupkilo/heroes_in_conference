@@ -1,5 +1,6 @@
 -- Insert default achievements and content groups into database
 
+DELETE FROM achieved;
 DELETE FROM achievements;
 INSERT INTO achievements (name, description, reward) VALUES 
     ("Welcome to my mine", "Collect ALL the ore", 11),
