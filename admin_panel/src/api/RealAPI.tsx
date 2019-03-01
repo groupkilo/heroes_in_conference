@@ -25,6 +25,7 @@ interface ServerEvent {
     desc: string,
     start: ServerTime,
     end: ServerTime,
+    count: number,
 }
 
 function convertServerToClientEvent(input: ServerEvent): Event {
@@ -34,6 +35,7 @@ function convertServerToClientEvent(input: ServerEvent): Event {
         description: input.desc,
         startTime: convertServerTime(input.start),
         endTime: convertServerTime(input.end),
+        count: input.count,
     }
 }
 
@@ -107,6 +109,10 @@ function convertServerToClientGroup(input: ServerGroup): ContentGroup {
     }
 }
 
+function encodeString(str: string) {
+    return encodeURIComponent(str.replace("!", "!!").replace("/", "!slash"));
+}
+
 interface ServerStat {
     time: ServerTime,
     requestCount: number,
@@ -120,6 +126,7 @@ function convertServerToClientStat(input: ServerStat): UsageStat {
 }
 
 async function doFetch<T>(url: string, extra?: RequestInit): Promise<APIResponse<T>> {
+    console.log(`doFetch ${url}`);
     const response = await fetch(url, {
         credentials: "include",
         ...extra,
@@ -173,8 +180,8 @@ export const RealAPI: API = {
     },
 
     updateEvent: async (event: Event) => {
-        const name = encodeURIComponent(event.name);
-        const desc = encodeURIComponent(event.description || " "); // we can't send empty description
+        const name = encodeString(event.name);
+        const desc = encodeString(event.description || " "); // we can't send empty description
         const start = Math.floor(event.startTime / 1000.0);
         const end = Math.floor(event.endTime / 1000.0);
         if (event.id === "new") {
@@ -203,7 +210,7 @@ export const RealAPI: API = {
     },
 
     updateMap: async (map: ConferenceMap, image?: Blob) => {
-        const name = encodeURIComponent(map.name);
+        const name = encodeString(map.name);
 
         let formData;
         if (image) {
@@ -255,8 +262,8 @@ export const RealAPI: API = {
     },
 
     createMapMarker: async (mapId, pos) => {
-        const name = encodeURIComponent("New Marker");
-        const desc = encodeURIComponent(" ");
+        const name = encodeString("New Marker");
+        const desc = encodeString(" ");
         const x = Math.floor(pos.x);
         const y = Math.floor(pos.y);
 
@@ -269,8 +276,8 @@ export const RealAPI: API = {
         console.log("Update map markers");
 
         const updatePromises = modifiedMarkers.map(value => {
-            const name = encodeURIComponent(value.name);
-            const desc = encodeURIComponent(value.description || " ");
+            const name = encodeString(value.name);
+            const desc = encodeString(value.description || " ");
             const x = Math.round(value.pos.x);
             const y = Math.round(value.pos.y);
             return doFetch(`${apiUrl}/admin/markers/update/${value.id}/${name}/${desc}/${x}/${y}`);
