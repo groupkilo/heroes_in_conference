@@ -325,7 +325,8 @@ public class Event {
                   + " = i."
                   + INTERESTED_EVENT_ID_FIELD
                   + " WHERE "
-                  + " TABLE "
+                  + TABLE
+                  + "."
                   + ID_FIELD
                   + " = ? "
                   + " GROUP BY "
