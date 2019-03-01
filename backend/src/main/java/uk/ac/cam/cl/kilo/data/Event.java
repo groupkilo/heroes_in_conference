@@ -310,7 +310,7 @@ public class Event {
       PreparedStatement stmt =
           conc.prepareStatement(
               "SELECT *, COUNT("
-                  + "i."
+                  + "a."
                   + INTERESTED_EVENT_ID_FIELD
                   + ") AS "
                   + COUNT_FIELD
@@ -318,11 +318,11 @@ public class Event {
                   + TABLE
                   + " LEFT JOIN "
                   + INTERESTED_TABLE
-                  + " i ON "
+                  + " a ON "
                   + TABLE
                   + "."
                   + ID_FIELD
-                  + " = i."
+                  + " = a."
                   + INTERESTED_EVENT_ID_FIELD
                   + " WHERE "
                   + TABLE
@@ -352,11 +352,11 @@ public class Event {
   static Event from(ResultSet rs) throws DatabaseException {
     assert (rs != null);
     try {
-      long id = rs.getLong(TABLE + "." + ID_FIELD);
-      String name = rs.getString(TABLE + "." + NAME_FIELD);
-      String desc = rs.getString(TABLE + "." + DESC_FIELD);
-      Instant start = rs.getTimestamp(TABLE + "." + START_FIELD).toInstant();
-      Instant end = rs.getTimestamp(TABLE + "." + END_FIELD).toInstant();
+      long id = rs.getLong("a." + ID_FIELD);
+      String name = rs.getString(NAME_FIELD);
+      String desc = rs.getString(DESC_FIELD);
+      Instant start = rs.getTimestamp(START_FIELD).toInstant();
+      Instant end = rs.getTimestamp(END_FIELD).toInstant();
       int count = rs.getInt(COUNT_FIELD);
       return new Event(id, name, desc, start, end, count);
     } catch (SQLException e) {
