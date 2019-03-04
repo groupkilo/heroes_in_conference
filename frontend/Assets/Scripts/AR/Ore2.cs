@@ -13,9 +13,9 @@ public class Ore2 : MonoBehaviour
 	void Start()
 	{
         hitCounter = 0;
-        resource.SetActive(!NetworkDatabase.NDB.GetAchievementObjByName("Bashful").Won);
-        obj.SetActive(!NetworkDatabase.NDB.GetAchievementObjByName("Bashful").Won);
-        resourceCollected.SetActive(NetworkDatabase.NDB.GetAchievementObjByName("Bashful").Won); 
+        resource.SetActive(!NetworkDatabase.NDB.GetAchievementWonByName("Bashful"));
+        obj.SetActive(!NetworkDatabase.NDB.GetAchievementWonByName("Bashful"));
+        resourceCollected.SetActive(NetworkDatabase.NDB.GetAchievementWonByName("Bashful")); 
 	}
 
 	void Update()
