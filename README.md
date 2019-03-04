@@ -124,6 +124,7 @@ mv build ../backend/static/admin
 - GUI sprite assets (`Fantasy Wooden GUI : Free` plugin)
 - 3D models
 - Fingers Lite plugin
+- Vuforia SDK
 
 ### Setup
 
@@ -143,3 +144,7 @@ Adding a model for the model viewer requires the following steps:
 1. Add the model into the scene
 2. Increase the `ModelList` component of the `ModelViewer` object
 3. Add the model into the list (make sure it is the right index, as it needs to be the same as its index in the inventory)
+
+# Feedback
+
+Feedback and bug reports are welcome!
