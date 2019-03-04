@@ -151,7 +151,7 @@ Adding a model for the model viewer requires the following steps:
 
 #### Network Database
 
-The `Client` script handles all networking and the `Database` script handles all local caching and saving to disk. Neither of these use any Unity calls or have any concept of the Unity Engine. The `NetworkDatabase` script is a singleton present in every every scene (through DontDestroyOnLoad), it combines the two scripts and implements methods to enable interaction with them - the scripts in the app shouldn't have any concept of Client or Database, only NetworkDatabase. In general calls to the `Client` script should be made in a separate thread and then handled in Unity by setting a flag, which is checked in an Update method and then handled.
+The `Client` script handles all networking and the `Database` script handles all local caching and saving to disk. Neither of these use any Unity calls or have any concept of the Unity Engine. The `NetworkDatabase` script is a singleton present in every every scene (through `DontDestroyOnLoad`). It combines the two scripts and implements methods to enable interaction with them - the scripts in the app shouldn't have any concept of `Client` or `Database`, only `NetworkDatabase`. In general calls to the `Client` script should be made in a separate thread and then handled in Unity by setting a flag, which is checked in an Update method and then handled.
 
 # Feedback
 
