@@ -114,3 +114,16 @@ The administration panel is set up to be mounted at `/admin/` on the server. Thi
 mkdir ../backend/static
 mv build ../backend/static/admin
 ```
+
+## Unity Client
+
+### Requirements
+
+- Unity 2018.3.2, may work with other versions
+- TextMesh Pro, comes with Unity in some versions
+- GUI sprite assets
+- 3D models
+
+### Setup
+
+The scenes have been setup with temporary sprite and model assets, but these aren't online so new ones must be imported and referenced in the scenes. The Api Compatibility Level in Unity must be set to `.Net 4.x` to enable use of `dynamic` in C#, this can be set under `File > Build Settings... > Player Settings... > Other Settings`
