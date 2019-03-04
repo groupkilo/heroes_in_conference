@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections;
 using System.IO;
@@ -21,6 +21,9 @@ public class Database {
             events = new Dictionary<long, DBEvent>();
         if (achievements == null)
             achievements = new Dictionary<long, DBAchievement>();
+
+        if (wonAchievements == null)
+            wonAchievements = new HashSet<long>();
         if (contentGroups == null)
             contentGroups = new Dictionary<string, bool>();
         if (players == null)
@@ -39,6 +42,8 @@ public class Database {
             } catch (SerializationException ex) { 
                 throw new SerializationException(((object)ex).ToString() + "\n" + ex.Source);
             }
+
+            // Need to init to deal with loading older versions of the database that may not have all lists/hashsets etc initialised
             db.init();
             return db;
         }
@@ -55,6 +60,7 @@ public class Database {
     }
 
     #region Achievements
+    private HashSet<long> wonAchievements;
     private Dictionary<long, DBAchievement> achievements;
 
     public void SetAllAchievements(List<DBAchievement> allAchievements) {
@@ -72,14 +78,17 @@ public class Database {
         if (!achievements.ContainsKey(achievementID))
             return;
 
-        achievements[achievementID].Won = wonAchievement;
+        if (wonAchievement)
+            wonAchievements.Add(achievementID);
+        else
+            wonAchievements.Remove(achievementID);
     }
 
-    public void AddAchievement(long achievementID, string achievementName, string achievementDescription, bool wonAchievement = false) {
+    public void AddAchievement(long achievementID, string achievementName, string achievementDescription) {
         if (achievements.ContainsKey(achievementID))
             return;
 
-        achievements.Add(achievementID, new DBAchievement(achievementID, achievementName, achievementDescription, wonAchievement));
+        achievements.Add(achievementID, new DBAchievement(achievementID, achievementName, achievementDescription));
     }
 
     public long GetAchievementIdByName(string name) {
@@ -91,23 +100,30 @@ public class Database {
             return ach.AchievementID;
     }
 
+    public bool GetAchievementWonByName(string name) {
+        return wonAchievements.Contains(GetAchievementIdByName(name));
+    }
+
+    public bool GetAchievementWonById(long achId) {
+        return wonAchievements.Contains(achId);
+    }
+
+    public DBAchievement GetAchievementByName(string name) {
+        return achievements.Values.FirstOrDefault(a => a.AchievementName == name);
+    }
+
     public DBAchievement GetAchievementObjByName(string name) {
         return achievements.Values.FirstOrDefault(a => a.AchievementName == name);
     }
 
     public List<DBAchievement> GetAllWonAchievements() {
-        return achievements.Values.Where(a => a.Won).ToList();
+        return wonAchievements.Select(id => achievements[id]).ToList();
     }
 
     public void SetAllWonAchievements(List<long> wonAchs) {
-        foreach(DBAchievement ach in achievements.Values) {
-            ach.Won = false;
-        }
-        foreach(long wonAch in wonAchs) {
-            achievements[wonAch].Won = true;
-        }
-
+        wonAchievements = new HashSet<long>(wonAchs);
     }
+
     #endregion
 
     #region Events

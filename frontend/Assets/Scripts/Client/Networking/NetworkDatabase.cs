@@ -144,6 +144,7 @@ public class NetworkDatabase : MonoBehaviour {
         return newInterest;
     }
 
+
     #region Items
     /// <summary>
     /// Adds the specified amount of items to the local database. If the item doens exist yet, just create a new one with count amount
@@ -204,7 +205,7 @@ public class NetworkDatabase : MonoBehaviour {
     }
 
     /// <summary>
-    /// Gets and achievement from local db by name (DOESNT CONTACT THE SERVER)
+    /// Gets the achievement from local db by name (DOESNT CONTACT THE SERVER)
     /// </summary>
     /// <returns>The achievement ID</returns>
     public long GetAchievementIdByName(string name) {
@@ -212,11 +213,27 @@ public class NetworkDatabase : MonoBehaviour {
     }
 
     /// <summary>
-    /// Gets and achievement from local db by name (DOESNT CONTACT THE SERVER)
+    /// Gets if the achievement was won from local db by name (DOESNT CONTACT THE SERVER)
     /// </summary>
-    /// <returns>The achievement Object</returns>
-    public DBAchievement GetAchievementObjByName(string name) {
-        return localDb.GetAchievementObjByName(name);
+    /// <returns>The achievement Won status</returns>
+    public bool GetAchievementWonByName(string name) {
+        return localDb.GetAchievementWonByName(name);
+    }
+
+    /// <summary>
+    /// Gets if the achievement was won from local db by id (DOESNT CONTACT THE SERVER)
+    /// </summary>
+    /// <returns>The achievement Won status</returns>
+    public bool GetAchievementWonById(long achId) {
+        return localDb.GetAchievementWonById(achId);
+    }
+
+    /// <summary>
+    /// Gets if the achievement was won from local db by name (DOESNT CONTACT THE SERVER)
+    /// </summary>
+    /// <returns>The achievement Won status</returns>
+    public DBAchievement GetAchievementByName(string name) {
+        return localDb.GetAchievementByName(name);
     }
 
     public bool GetContentGroupActiveByName(string name) {

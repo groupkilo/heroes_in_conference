@@ -10,7 +10,7 @@ public class HintFind : MonoBehaviour
 
 	void Start()
 	{
-        hint.SetActive(!NetworkDatabase.NDB.GetAchievementObjByName("What a steal!").Won);
+        hint.SetActive(!NetworkDatabase.NDB.GetAchievementWonByName("What a steal!"));
 	}
 
 	void Update()
