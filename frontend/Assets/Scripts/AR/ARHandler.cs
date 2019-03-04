@@ -22,7 +22,7 @@ public class ARHandler : MonoBehaviour
     public static void GetAchievement(string achievement)
     {
         // Get achievement object 'achievement'
-        DBAchievement mChiev = NetworkDatabase.NDB.GetAchievementObjByName(achievement);
+        DBAchievement mChiev = NetworkDatabase.NDB.GetAchievementByName(achievement);
         // Set achievement in Network Database
         NetworkDatabase.NDB.SetAchievement(mChiev.AchievementID);
         // Trigger popup window with achievement title and description
@@ -38,7 +38,7 @@ public class ARHandler : MonoBehaviour
         {
             NetworkDatabase.NDB.SetAchievement(NetworkDatabase.NDB.GetAchievementIdByName("It's all mine"));
 
-            DBAchievement mChiev2 = NetworkDatabase.NDB.GetAchievementObjByName("It's all mine");
+            DBAchievement mChiev2 = NetworkDatabase.NDB.GetAchievementByName("It's all mine");
             NetworkDatabase.NDB.SetAchievement(mChiev2.AchievementID);
             PopupScript.ps.GotAchievement(mChiev2.AchievementName, mChiev2.AchievementDescription);
         }
@@ -47,7 +47,7 @@ public class ARHandler : MonoBehaviour
         {
             NetworkDatabase.NDB.SetAchievement(NetworkDatabase.NDB.GetAchievementIdByName("Mourning wood"));
             
-            DBAchievement mChiev2 = NetworkDatabase.NDB.GetAchievementObjByName("Mourning wood");
+            DBAchievement mChiev2 = NetworkDatabase.NDB.GetAchievementByName("Mourning wood");
             NetworkDatabase.NDB.SetAchievement(mChiev2.AchievementID);
             PopupScript.ps.GotAchievement(mChiev2.AchievementName, mChiev2.AchievementDescription);
         }
@@ -56,7 +56,7 @@ public class ARHandler : MonoBehaviour
         {
             NetworkDatabase.NDB.SetAchievement(NetworkDatabase.NDB.GetAchievementIdByName("Ocean man"));
             
-            DBAchievement mChiev2 = NetworkDatabase.NDB.GetAchievementObjByName("Ocean man");
+            DBAchievement mChiev2 = NetworkDatabase.NDB.GetAchievementByName("Ocean man");
             NetworkDatabase.NDB.SetAchievement(mChiev2.AchievementID);
             PopupScript.ps.GotAchievement(mChiev2.AchievementName, mChiev2.AchievementDescription);
         }
@@ -65,24 +65,24 @@ public class ARHandler : MonoBehaviour
     // Return all ore collected
     private static bool ore()
     {
-        return (NetworkDatabase.NDB.GetAchievementObjByName("Grumpy").Won && 
-                NetworkDatabase.NDB.GetAchievementObjByName("Bashful").Won &&
-                    NetworkDatabase.NDB.GetAchievementObjByName("Dopey").Won);
+        return (NetworkDatabase.NDB.GetAchievementWonByName("Grumpy") && 
+                NetworkDatabase.NDB.GetAchievementWonByName("Bashful") &&
+                    NetworkDatabase.NDB.GetAchievementWonByName("Dopey"));
     }
 
     // Return all wood collected
     private static bool wood()
     {
-        return (NetworkDatabase.NDB.GetAchievementObjByName("It's treeson!").Won && 
-                NetworkDatabase.NDB.GetAchievementObjByName("Timber!!!").Won &&
-                    NetworkDatabase.NDB.GetAchievementObjByName("Run Forest, run!").Won);
+        return (NetworkDatabase.NDB.GetAchievementWonByName("It's treeson!") && 
+                NetworkDatabase.NDB.GetAchievementWonByName("Timber!!!") &&
+                    NetworkDatabase.NDB.GetAchievementWonByName("Run Forest, run!"));
     }
 
     // Return all fish collected
     private static bool fish()
     {
-        return (NetworkDatabase.NDB.GetAchievementObjByName("Finding Nome").Won && 
-                NetworkDatabase.NDB.GetAchievementObjByName("Finding Dyro").Won);
+        return (NetworkDatabase.NDB.GetAchievementWonByName("Finding Nome") && 
+                NetworkDatabase.NDB.GetAchievementWonByName("Finding Dyro"));
     }
 
     // Return name of object interacted with (touched) or empty string if none

@@ -13,7 +13,7 @@ public class Wood3 : MonoBehaviour
     void Start()
 	{
 		swipeCount = 0;
-        resource.SetActive(!NetworkDatabase.NDB.GetAchievementObjByName("It's treeson!").Won);
+        resource.SetActive(!NetworkDatabase.NDB.GetAchievementWonByName("It's treeson!"));
         meshRenderer = resource.GetComponent<MeshRenderer>();
     }
 
