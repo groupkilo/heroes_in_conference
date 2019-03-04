@@ -28,7 +28,7 @@ Running `autoconf.py` will automatically configure, build and run the server. In
 
 ### Manual Configuration
 
-Manual configuration of the server is error-prone, so the automatic approach is strongly recommended. However, a description is given here for copmleteness.
+Manual configuration of the server is error-prone, so the automatic approach is strongly recommended. However, a description is given here for completeness.
 
 In order for the server to work correctly, you will need create three files in your `backend` directory. These are: `facebook.properties`, `database.properties`, and `admin.properties`. All commands shown in the following section assume you are already inside the `backend` directory. Also see [manually configuring the admin panel](#administration-panel). 
 
