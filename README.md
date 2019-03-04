@@ -129,6 +129,12 @@ mv build ../backend/static/admin
 
 The scenes have been setup with temporary sprite and model assets, but these aren't online so new ones must be imported and referenced in the scenes. The Api Compatibility Level in Unity must be set to `.Net 4.x` to enable use of `dynamic` in C#, this can be set under `File > Build Settings... > Player Settings... > Other Settings`
 ### Editing the project
+Adding an item to the inventory requires the following steps:
+-Creating a copy of a slot object (already done up to 32 total items)
+-Increasing the size of the slotFull component of the Inventory object (already done up to 32 total items)
+-Dragging the new object to the Slot component of the Inventory object (already done up to 32 total items, only sprite needs to be updated)
+-In order to unlock an in the inventory, slotFull must be set to true at that index
 Adding a model for the model viewer requires the following steps:
--Increasing the size of the slotFull component in the inventory panel script (set to true if you want the model unlocked by default, but I recommend doing this in the InventoryScript)
--Adding the model into the slots component of the inventory panel script
+-Adding the model into the scene
+-Increasing the ModelList component of the ModelViewer object
+-Adding the model into the list (make sure it is the right index, as it needs to be the same as its index in the inventory)
