@@ -121,8 +121,9 @@ mv build ../backend/static/admin
 
 - Unity 2018.3.2, may work with other versions
 - TextMesh Pro, comes with Unity in some versions
-- GUI sprite assets
+- GUI sprite assets (`Fantasy Wooden GUI : Free` plugin)
 - 3D models
+- Fingers Lite plugin
 
 ### Setup
 
