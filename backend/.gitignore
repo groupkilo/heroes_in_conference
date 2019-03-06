@@ -1,5 +1,7 @@
 /data/
 *.jar
-/static/
+/static/maps/
+/static/profiles/
+/static/admin/
 *.properties
 server.log

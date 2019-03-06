@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Heroes in Conference</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .container {
+        box-sizing: border-box;
+        width: 100%;
+        padding-left: calc(50% - 500px);
+        padding-right: calc(50% - 500px);
+        height: auto;
+      }
+
+      h1 {
+        font-size: 50px;
+      }
+
+      h2 {
+        font-size: 32px; 
+      }
+
+      h5 {
+        font-size: 20px;
+        font-weight: lighter;
+        font-style: italic;
+        margin: 0px;
+      }
+
+      h1, h2, h3, h4, h5 {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      p {
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 20px;
+        font-weight: lighter;
+      }
+
+      #banner {
+        position: absolute;
+        left: 0;
+        min-height: 400px;
+        overflow: hidden;
+        width: 100%;
+        height: auto;
+        box-shadow: inset 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+        display: block;
+        background-image: url('https://vertigo6.nl/wp-content/uploads/2018/05/RuneScape-2018.png');
+        background-size: cover;
+        background-position: 50% 50%;
+        background-repeat: no-repeat
+      }
+
+      #fill {
+        height: 400px; 
+      }
+
+      #partners {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .partner {
+        max-height: 100px; 
+        max-width: calc(100% - 40px); 
+        margin: 20px;
+      }
+
+      #footer {
+        background-color: #EEE;
+        min-height: 200px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        color: #999;
+        box-sizing: border-box;
+        padding-left: calc(50% - 500px);
+        padding-right: calc(50% - 500px);
+      }
+
+      #footer p {
+        font-size: 12px; 
+      }
+
+      a {
+        text-decoration: none;
+        color: #1da1f2; 
+        transition: color 300ms;
+      }
+
+      a:hover {
+        color: #31a9f3;
+      }
+
+      .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .row * {
+        padding: 5px; 
+      }
+
+      #download {
+        width: 100%;
+        max-width: 300px;
+        height: 100px;
+        border-radius: 15px;
+        margin-top: 5px;
+        margin-bottom: 0px;
+        transition: margin-top 150ms, margin-bottom 150ms, box-shadow 150ms, background-color 300ms;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        background-color: #1da1f2; 
+      }
+
+      #download:hover {
+        margin-top: 0; 
+        margin-bottom: 5px;
+        box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+        background-color: #31a9f3;
+      }
+
+      #download i {
+        font-size: 40px; 
+      }
+
+      tt {
+        font-family: monospace;
+        border-radius: 3px;
+        background-color: #EEE;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <br>
+      <br>
+      <h1>Heroes in Conference</h1>
+      <h5>A Computer Lab Group Project 2019</h5>
+      <br>
+      <br>
+      <div id="banner">
+      </div>
+      <div id="fill"></div>
+      <br><br>
+      <h2>Our Project</h2>
+      <p>
+      Even the best conferences and conventions experience a slump where engagement declines. We're prototyping a mobile AR experience to keep conference attendees interested - using gamification and social techniques to bring attendees together, predict and counter the slump, and deliver key information about their event.
+      </p>
+      <h2>Get Our App</h2>
+      <p>Our app is available for download as a <tt>.apk</tt> file. We've populated it with information about the 2019 group project show, so download it and try it out! We'll be up in the Intel lab with a collection of AR puzzles you can have a crack at.</p>
+      <div class="row">
+        <a href="/heroes_in_conference.apk" id="download" download>
+          <i class="material-icons">get_app</i>
+          <h2>Download</h2>
+        </a>
+      </div>
+      <br>
+      <h2>Read Our Code</h2>
+      <p>All our code is avaiable to read online on <a href="https://github.com/groupkilo/heroes_in_conference/">Github</a>.</p>
+      <div class="row">
+        <a class="github-button" href="https://github.com/groupkilo/heroes_in_conference/subscription" data-icon="octicon-eye" data-size="large" aria-label="Watch groupkilo/heroes_in_conference on GitHub">Watch</a>
+        <a class="github-button" href="https://github.com/groupkilo/heroes_in_conference" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star groupkilo/heroes_in_conference on GitHub">Star</a>
+      </div>
+      <br>
+      <br>
+      <div id="footer">
+        <br>
+        <br>
+        <h3>Heroes in Conference</h3>
+        <h5>A Cambridge University Computer Laboratory Educational Project</h5>
+        <p>All images are property of their respective owners.<br>
+        Copyright &copy; 2019 Members of Group Kilo. All rights reserved.</p>
+      </div>
+    </div>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>
