@@ -279,12 +279,11 @@ public class Event {
         // Need to execute two transactions atomically, so disable auto-commit
         conc.setAutoCommit(false);
         PreparedStatement stmt =
-            conc.prepareStatement("DELETE FROM " + TABLE + " WHERE " + ID_FIELD + " = ?");
-        stmt.setLong(1, id);
-        stmt.executeUpdate();
-        stmt =
             conc.prepareStatement(
                 "DELETE FROM " + INTERESTED_TABLE + " WHERE " + INTERESTED_EVENT_ID_FIELD + " = ?");
+        stmt.setLong(1, id);
+        stmt.executeUpdate();
+        stmt = conc.prepareStatement("DELETE FROM " + TABLE + " WHERE " + ID_FIELD + " = ?");
         stmt.setLong(1, id);
         stmt.executeUpdate();
         // Commit if both transactions were successful

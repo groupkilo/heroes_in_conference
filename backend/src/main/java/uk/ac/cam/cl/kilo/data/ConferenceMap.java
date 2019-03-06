@@ -175,12 +175,11 @@ public class ConferenceMap {
         // Need to execute two transactions atomically, so disable auto-commit
         conc.setAutoCommit(false);
         PreparedStatement stmt =
-            conc.prepareStatement("DELETE FROM " + TABLE + " WHERE " + ID_FIELD + " = ?");
-        stmt.setLong(1, id);
-        stmt.executeUpdate();
-        stmt =
             conc.prepareStatement(
                 "DELETE FROM " + MapMarker.TABLE + " WHERE " + MapMarker.MAP_FIELD + " = ?");
+        stmt.setLong(1, id);
+        stmt.executeUpdate();
+        stmt = conc.prepareStatement("DELETE FROM " + TABLE + " WHERE " + ID_FIELD + " = ?");
         stmt.setLong(1, id);
         stmt.executeUpdate();
         // Commit if both transactions were successful
